@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "rootDirs": ["src"],
+    "outDir": "dist",
+    "lib": ["es2020"],
+    "target": "esnext",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    // "sourceMap": true,
+    "esModuleInterop": true,
+    "types": ["node"]
+    // "declaration": true,
+    // "declarationDir": "types",
+    // "emitDeclarationOnly": true
+  },
+  "include": ["src/**/*.ts", "**/*.tsx"],
+  "exclude": ["node_modules"]
+}
