@@ -1,13 +1,12 @@
-// server.js
-import express from "express";
+import express, { Request, Response, NextFunction } from "express";
 import { encrypt, decrypt } from "./cryptoUtils.js";
 
 const app = express();
 
 // Middleware to encrypt response
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
   const originalSend = res.send;
-  res.send = function (body) {
+  res.send = function (body: any) {
     if (typeof body === "string") {
       body = encrypt(body);
     }
@@ -17,14 +16,12 @@ app.use((req, res, next) => {
 });
 
 // Sample route
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Hello, world!");
 });
 
 // Route to test decryption
-app.get("/decrypt", (req, res) => {
-  console.log(req.query.message);
-  //   const encryptedMessage = req.query.message;
+app.get("/decrypt", (req: Request, res: Response) => {
   const encryptedMessage = encrypt("Hello, World!");
   if (encryptedMessage) {
     const decryptedMessage = decrypt(encryptedMessage);
