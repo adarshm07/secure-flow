@@ -3,8 +3,11 @@ import { encrypt, decrypt } from "./cryptoUtils.js";
 
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 // Middleware to encrypt response
-app.use((req: Request, res: Response, next: NextFunction) => {
+app.use('/encrypt', (req: Request, res: Response, next: NextFunction) => {
   const originalSend = res.send;
   res.send = function (body: any) {
     if (typeof body === "string") {
@@ -16,18 +19,19 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 
 // Sample route
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello, world!");
+app.get("/encrypt", (req: Request, res: Response) => {
+  res.send(req.body);
 });
 
 // Route to test decryption
 app.get("/decrypt", (req: Request, res: Response) => {
-  const encryptedMessage = encrypt("Hello, World!");
+  const encryptedMessage = req.body.data;
+
   if (encryptedMessage) {
     const decryptedMessage = decrypt(encryptedMessage);
-    console.log(encryptedMessage);
-    console.log(decryptedMessage);
-    res.send(`Decrypted message: ${decryptedMessage}`);
+    console.log(JSON.parse(decryptedMessage));
+
+    res.status(200).json(decryptedMessage);
   } else {
     res.status(400).send("No message provided");
   }
