@@ -3,13 +3,15 @@
 const fs = require("fs");
 const path = require("path");
 
-const configContent = `module.exports = {
+// Default configuration content
+const defaultConfigContent = `module.exports = {
   encryptionAlgorithm: 'aes-256-cbc',
   encryptionKey: 'your-32-character-encryption-key',
   iv: Buffer.from('your-16-character-iv'),
 };
 `;
 
+// Command-line arguments
 const args = process.argv.slice(2);
 
 let fileType = "javascript"; // Default to JavaScript
@@ -17,7 +19,7 @@ let fileType = "javascript"; // Default to JavaScript
 if (args.includes("--typescript")) {
   fileType = "ts";
 } else if (args.includes("--javascript")) {
-  fileType = "js";
+  fileType = "cjs";
 } else {
   console.error("Invalid argument. Use --typescript or --javascript.");
   process.exit(1);
@@ -33,5 +35,6 @@ if (fs.existsSync(configPath)) {
   process.exit(1);
 }
 
-fs.writeFileSync(configPath, configContent, "utf8");
-console.log("secureflow.config.ts has been created successfully.");
+// Write the config file
+fs.writeFileSync(configPath, defaultConfigContent, "utf8");
+console.log(`${configFileName} has been created successfully.`);
