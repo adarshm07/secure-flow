@@ -1,6 +1,4 @@
----
-title: SecureFlow Configuration Generator
----
+## SecureFlow Configuration Generator
 
 The SecureFlow Configuration Generator (`create-secureflow-config`) is a command-line tool that allows you to quickly create a configuration file for SecureFlow. This configuration file includes encryption settings required for SecureFlow to securely encrypt and decrypt data.
 
@@ -31,11 +29,13 @@ module.exports = {
 };
 ```
 
-Configuration
+## Configuration
+
 encryptionAlgorithm: The encryption algorithm used by SecureFlow. Default is 'aes-256-cbc'.
 encryptionKey: A 32-character string used as the encryption key. Replace 'your-32-character-encryption-key' with your actual encryption key.
 iv: Initialization Vector (IV) used for encryption. Should be a 16-character Buffer. Replace 'your-16-character-iv' with your actual IV.
-Example
+
+## Example
 Here's an example of how to use the generated secureflow.config.ts file in your SecureFlow application:
 
 ```typescript
@@ -50,16 +50,15 @@ module.exports = {
 import { config } from "./secureflow.config";
 ```
 
-// Use config.encryptionAlgorithm, config.encryptionKey, and config.iv as needed
-License
+## License
 This package is licensed under the MIT License.
 
-Contributing
+## Contributing
 Contributions are welcome! Feel free to open an issue or submit a pull request.
 
-Bug Reports
+## Bug Reports
 If you find any issues with the package, please report them on the GitHub issues page.
 
-Author
+## Author
 Adarsh M
 GitHub: `[Profile](https://github.com/adarshm07/)`
