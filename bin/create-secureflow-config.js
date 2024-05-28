@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import { existsSync, writeFileSync } from "fs";
-import { resolve } from "path";
+const fs = require("fs");
+const path = require("path");
 
 const configContent = `module.exports = {
   encryptionAlgorithm: 'aes-256-cbc',
@@ -10,12 +10,12 @@ const configContent = `module.exports = {
 };
 `;
 
-const configPath = resolve(process.cwd(), "secureflow.config.ts");
+const configPath = path.resolve(process.cwd(), "secureflow.config.ts");
 
-if (existsSync(configPath)) {
+if (fs.existsSync(configPath)) {
   console.error("secureflow.config.ts already exists in the root directory.");
   process.exit(1);
 }
 
-writeFileSync(configPath, configContent, "utf8");
+fs.writeFileSync(configPath, configContent, "utf8");
 console.log("secureflow.config.ts has been created successfully.");

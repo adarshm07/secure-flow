@@ -4,15 +4,15 @@
   "description": "Secure Flow is a lightweight TypeScript utility package for encryption and decryption using the AES-256-CBC algorithm. This package simplifies the process of securely encrypting and decrypting text, making it easy to integrate strong encryption into your Node.js applications.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "bin": {
+    "create-secureflow-config": "./bin/create-secureflow-config.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "create-config": "ts-node src/cli.ts",
     "dev": "npm run build && nodemon --inspect ./dist/server.js",
     "start": "npm run build && node ./dist/server.js"
-  },
-  "bin": {
-    "create-secureflow-config": "./bin/create-secureflow-config.js"
   },
   "keywords": [
     "encrypt",
