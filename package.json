@@ -1,6 +1,6 @@
 {
   "name": "secure-flow",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Secure Flow is a lightweight TypeScript utility package for encryption and decryption using the AES-256-CBC algorithm. This package simplifies the process of securely encrypting and decrypting text, making it easy to integrate strong encryption into your Node.js applications.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

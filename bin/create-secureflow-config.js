@@ -10,10 +10,26 @@ const configContent = `module.exports = {
 };
 `;
 
-const configPath = path.resolve(process.cwd(), "secureflow.config.ts");
+const args = process.argv.slice(2);
 
+let fileType = "javascript"; // Default to JavaScript
+
+if (args.includes("--typescript")) {
+  fileType = "ts";
+} else if (args.includes("--javascript")) {
+  fileType = "js";
+} else {
+  console.error("Invalid argument. Use --typescript or --javascript.");
+  process.exit(1);
+}
+
+// Determine the config file path based on the fileType
+const configFileName = `secureflow.config.${fileType}`;
+const configPath = path.resolve(process.cwd(), configFileName);
+
+// Check if config file already exists
 if (fs.existsSync(configPath)) {
-  console.error("secureflow.config.ts already exists in the root directory.");
+  console.error(`${configFileName} already exists in the root directory.`);
   process.exit(1);
 }
 

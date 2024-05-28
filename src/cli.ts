@@ -7,11 +7,20 @@ const configContent = `module.exports = {
   iv: Buffer.from('your-16-character-iv'),
 };
 `;
+const args = process.argv.slice(2);
 
-const configPath = path.resolve(process.cwd(), 'secureflow.config.ts');
+let configPath: string;
+if (args.includes('--typescript')) {
+    configPath = path.resolve(process.cwd(), 'secureflow.config.ts');
+} else if (args.includes('--javascript')) {
+    configPath = path.resolve(process.cwd(), 'secureflow.config.js');
+} else {
+    console.error('Invalid argument. Use --typescript or --javascript.', args);
+    process.exit(1);
+}
 
 if (fs.existsSync(configPath)) {
-    console.error('secureflow.config.ts already exists in the root directory.');
+    console.error(args.includes('--typescript') ? 'secureflow.config.js already exists in the root directory.' : 'secureflow.config.ts already exists in the root directory.');
     process.exit(1);
 }
 
