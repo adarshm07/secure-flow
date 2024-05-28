@@ -7,9 +7,9 @@ The SecureFlow Configuration Generator (`create-secureflow-config`) is a command
 You can install the `create-secureflow-config` package globally using npm or yarn:
 
 ```bash
-npm install -g your-package-name
+npm install -g secure-flow
 # or
-yarn global add your-package-name
+yarn global add secure-flow
 ```
 
 Usage
@@ -36,6 +36,7 @@ encryptionKey: A 32-character string used as the encryption key. Replace 'your-3
 iv: Initialization Vector (IV) used for encryption. Should be a 16-character Buffer. Replace 'your-16-character-iv' with your actual IV.
 
 ## Example
+
 Here's an example of how to use the generated secureflow.config.ts file in your SecureFlow application:
 
 ```typescript
@@ -51,14 +52,18 @@ import { config } from "./secureflow.config";
 ```
 
 ## License
+
 This package is licensed under the MIT License.
 
 ## Contributing
+
 Contributions are welcome! Feel free to open an issue or submit a pull request.
 
 ## Bug Reports
+
 If you find any issues with the package, please report them on the GitHub issues page.
 
 ## Author
+
 Adarsh M
 GitHub: `[Profile](https://github.com/adarshm07/)`
