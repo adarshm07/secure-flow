@@ -13,7 +13,7 @@ let configPath: string;
 if (args.includes('--typescript')) {
     configPath = path.resolve(process.cwd(), 'secureflow.config.ts');
 } else if (args.includes('--javascript')) {
-    configPath = path.resolve(process.cwd(), 'secureflow.config.js');
+    configPath = path.resolve(process.cwd(), 'secureflow.config.cjs');
 } else {
     console.error('Invalid argument. Use --typescript or --javascript.', args);
     process.exit(1);

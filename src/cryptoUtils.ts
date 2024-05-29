@@ -1,13 +1,13 @@
-import crypto from "crypto";
 import { loadConfig } from './loadConfig.js';
 import { Config } from './config.js';
+import { createCipheriv, createDecipheriv } from 'node:crypto';
 
 const config: Config = loadConfig();
 
 // Define return types and parameter types for the functions
 export function encrypt(text: string): string | undefined {
   try {
-    const cipher = crypto.createCipheriv(
+    const cipher = createCipheriv(
       config.encryptionAlgorithm,
       Buffer.from(config.encryptionKey),
       config.iv
@@ -23,7 +23,7 @@ export function encrypt(text: string): string | undefined {
 
 export function decrypt(text: string): string | undefined {
   try {
-    const decipher = crypto.createDecipheriv(
+    const decipher = createDecipheriv(
       config.encryptionAlgorithm,
       Buffer.from(config.encryptionKey),
       config.iv

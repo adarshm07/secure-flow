@@ -27,7 +27,6 @@
     "url": "https://github.com/adarshm07/secure-flow.git"
   },
   "dependencies": {
-    "crypto": "^1.0.1",
     "express": "^4.19.2"
   },
   "devDependencies": {
