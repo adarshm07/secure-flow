@@ -1,10 +1,8 @@
-## SecureFlow Configuration Generator
+## SecureFlow
 
-The SecureFlow Configuration Generator (`create-secureflow-config`) is a command-line tool that allows you to quickly create a configuration file for SecureFlow. This configuration file includes encryption settings required for SecureFlow to securely encrypt and decrypt data.
+The secure-flow provides the functionality for encrypting and decrypting text using the Node.js crypto module, with configurations loaded from a specified source.
 
 ## Installation
-
-You can install the `create-secureflow-config` package globally using npm or yarn:
 
 ```bash
 npm install -g secure-flow
@@ -12,14 +10,17 @@ npm install -g secure-flow
 yarn global add secure-flow
 ```
 
-Usage
+## Usage
+
 Once installed, you can run the following command to generate the secureflow.config.ts file in your current working directory:
 
 ```bash
-create-secureflow-config
+npx create-secureflow-config
+# or
+npx create-secureflow-config --typescript
 ```
 
-This will create a file named secureflow.config.ts with the following content:
+This will create a file named secureflow.config.ts or .js file with the following content:
 
 ```typescript
 module.exports = {
@@ -27,6 +28,26 @@ module.exports = {
   encryptionKey: "your-32-character-encryption-key",
   iv: Buffer.from("your-16-character-iv"),
 };
+```
+
+And you can import the encrypt or decrypt methods:
+
+```typescript
+import { encrypt, decrypt } from "secure-flow";
+```
+
+## Example usage with Express
+
+```typescript
+app.get("/encrypt", (req, res) => {
+  const data = JSON.stringify({ data: "Hello, World!" });
+  res.status(200).json(encrypt(data));
+});
+
+app.get("/decrypt", (req, res) => {
+  const data = req.body;
+  res.status(200).json(decrypt(data));
+});
 ```
 
 ## Configuration
@@ -34,22 +55,6 @@ module.exports = {
 encryptionAlgorithm: The encryption algorithm used by SecureFlow. Default is 'aes-256-cbc'.
 encryptionKey: A 32-character string used as the encryption key. Replace 'your-32-character-encryption-key' with your actual encryption key.
 iv: Initialization Vector (IV) used for encryption. Should be a 16-character Buffer. Replace 'your-16-character-iv' with your actual IV.
-
-## Example
-
-Here's an example of how to use the generated secureflow.config.ts file in your SecureFlow application:
-
-```typescript
-// secureflow.config.ts
-module.exports = {
-  encryptionAlgorithm: "aes-256-cbc",
-  encryptionKey: "your-32-character-encryption-key",
-  iv: Buffer.from("your-16-character-iv"),
-};
-
-// Your SecureFlow application
-import { config } from "./secureflow.config";
-```
 
 ## License
 
