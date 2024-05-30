@@ -2,6 +2,7 @@
   "compilerOptions": {
     "rootDirs": ["src"],
     "outDir": "dist",
+    "declaration": true,
     "target": "ES2020",
     "module": "CommonJS",
     "moduleResolution": "Node",
@@ -14,6 +15,6 @@
       "*": ["src/*", "types/*"]
     }
   },
-  "include": ["src", "types"],
+  "include": ["src/**/*.ts", "types/**/*.d.ts", "types/secure-flow.d.ts"],
   "exclude": ["node_modules"]
 }

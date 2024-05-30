@@ -1,8 +1,8 @@
 // types/secure-flow.d.ts
 
 declare module 'secure-flow' {
-    export function encrypt(text: string): string | undefined;
-    export function decrypt(text: string): string | undefined;
+    export function encrypt(text: string): string;
+    export function decrypt(text: string): string;
 
     export interface Config {
         encryptionAlgorithm: string;

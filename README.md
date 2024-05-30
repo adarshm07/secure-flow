@@ -15,12 +15,12 @@ yarn global add secure-flow
 Once installed, you can run the following command to generate the secureflow.config.ts file in your current working directory:
 
 ```bash
-npx create-secureflow-config
+npx create-secureflow-config --javascript
 # or
 npx create-secureflow-config --typescript
 ```
 
-This will create a file named secureflow.config.ts or .js file with the following content:
+This will create a file named secureflow.config.ts or secureflow.config.cjs file with the following content:
 
 ```typescript
 module.exports = {

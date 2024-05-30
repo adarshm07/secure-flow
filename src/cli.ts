@@ -20,7 +20,7 @@ if (args.includes('--typescript')) {
 }
 
 if (fs.existsSync(configPath)) {
-    console.error(args.includes('--typescript') ? 'secureflow.config.js already exists in the root directory.' : 'secureflow.config.ts already exists in the root directory.');
+    console.error(args.includes('--typescript') ? 'secureflow.config.ts already exists in the root directory.' : 'secureflow.config.cjs already exists in the root directory.');
     process.exit(1);
 }
 
