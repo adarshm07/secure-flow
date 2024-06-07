@@ -4,7 +4,6 @@ import { createCipheriv, createDecipheriv } from 'node:crypto';
 
 const config: Config = loadConfig();
 
-// Define return types and parameter types for the functions
 export function encrypt(text: string): string | undefined {
   try {
     const cipher = createCipheriv(

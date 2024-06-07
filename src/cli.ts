@@ -1,5 +1,9 @@
 import fs from 'fs';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __dirName = process.env.INIT_CWD;
 
 const configContent = `module.exports = {
   encryptionAlgorithm: 'aes-256-cbc',
@@ -7,22 +11,25 @@ const configContent = `module.exports = {
   iv: Buffer.from('your-16-character-iv'),
 };
 `;
-const args = process.argv.slice(2);
+
+console.log("Postinstall script is running");
+// Determine the paths
+const isTsFile = path.resolve(__dirName, 'tsconfig.json');
+// console.log("isTsFile", isTsFile);
 
 let configPath: string;
-if (args.includes('--typescript')) {
-    configPath = path.resolve(process.cwd(), 'secureflow.config.ts');
-} else if (args.includes('--javascript')) {
-    configPath = path.resolve(process.cwd(), 'secureflow.config.cjs');
+
+if (fs.existsSync(isTsFile)) {
+    configPath = path.resolve(__dirName, 'secureflow.config.ts');
 } else {
-    console.error('Invalid argument. Use --typescript or --javascript.', args);
-    process.exit(1);
+    configPath = path.resolve(__dirName, 'secureflow.config.cjs');
 }
 
+// Check if the config file already exists
 if (fs.existsSync(configPath)) {
-    console.error(args.includes('--typescript') ? 'secureflow.config.ts already exists in the root directory.' : 'secureflow.config.cjs already exists in the root directory.');
+    console.error(fs.existsSync(isTsFile) ? 'secureflow.config.ts already exists in the root directory.' : 'secureflow.config.cjs already exists in the root directory.');
     process.exit(1);
+} else {
+    fs.writeFileSync(configPath, configContent, 'utf8');
+    console.log(fs.existsSync(isTsFile) ? 'secureflow.config.ts has been created successfully.' : 'secureflow.config.cjs has been created successfully.');
 }
-
-fs.writeFileSync(configPath, configContent, 'utf8');
-console.log('secureflow.config.ts has been created successfully.');
