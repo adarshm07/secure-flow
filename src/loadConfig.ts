@@ -2,9 +2,8 @@ import { Config, defaultConfig } from './config.js';
 import path from 'path';
 import fs from 'fs';
 
-export function loadConfig(): Config {
+export async function loadConfig(): Promise<Config> {
     let customConfigPath: string;
-    // const args = process.argv.slice(2);
     let configPath = path.resolve(process.cwd(), 'tsconfig.json');
 
     if (fs.existsSync(configPath)) {
@@ -14,8 +13,9 @@ export function loadConfig(): Config {
     }
 
     if (fs.existsSync(customConfigPath)) {
-        const customConfig = require(customConfigPath).default || require(customConfigPath);
-        return { ...defaultConfig, ...customConfig };
+        const module = await import(customConfigPath);
+        let customConfig = module.default || module;
+        return { ...defaultConfig, ...customConfig } as Config;
     } else {
         throw new Error(`No config file found at ${customConfigPath}`);
     }

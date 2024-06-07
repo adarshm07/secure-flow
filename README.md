@@ -11,6 +11,7 @@ yarn global add secure-flow
 ```
 
 ## Usage
+
 A file named secureflow.config.ts or secureflow.config.cjs is created with the following content:
 
 ```typescript
@@ -30,13 +31,13 @@ import { encrypt, decrypt } from "secure-flow";
 ## Example usage with Express
 
 ```typescript
-app.get("/encrypt", (req, res) => {
-  const data = JSON.stringify({ data: "Hello, World!" });
+app.get("/encrypt", async (req, res) => {
+  const data = await JSON.stringify({ data: "Hello, World!" });
   res.status(200).json(encrypt(data));
 });
 
-app.get("/decrypt", (req, res) => {
-  const data = req.body;
+app.get("/decrypt", async (req, res) => {
+  const data = await req.body;
   res.status(200).json(decrypt(data));
 });
 ```

@@ -2,9 +2,9 @@ import { loadConfig } from './loadConfig.js';
 import { Config } from './config.js';
 import { createCipheriv, createDecipheriv } from 'node:crypto';
 
-const config: Config = loadConfig();
+const config: Config = await loadConfig();
 
-export function encrypt(text: string): string | undefined {
+export async function encrypt(text: string): Promise<string> {
   try {
     const cipher = createCipheriv(
       config.encryptionAlgorithm,
@@ -20,7 +20,7 @@ export function encrypt(text: string): string | undefined {
   }
 }
 
-export function decrypt(text: string): string | undefined {
+export async function decrypt(text: string): Promise<string> {
   try {
     const decipher = createDecipheriv(
       config.encryptionAlgorithm,
