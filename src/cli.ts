@@ -24,9 +24,8 @@ if (fs.existsSync(isTsFile)) {
 
 // Check if the config file already exists
 if (fs.existsSync(configPath)) {
-    console.log(fs.existsSync(isTsFile) ? 'secureflow.config.ts already exists in the root directory.' : 'secureflow.config.cjs already exists in the root directory.');
-    process.exit(1);
+    console.log(`${path.basename(configPath)} already exists in the root directory.`);
 } else {
     fs.writeFileSync(configPath, configContent, 'utf8');
-    console.log(fs.existsSync(isTsFile) ? 'secureflow.config.ts has been created successfully.' : 'secureflow.config.cjs has been created successfully.');
+    console.log(`${path.basename(configPath)} has been created successfully.`);
 }
