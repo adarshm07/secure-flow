@@ -2,13 +2,20 @@
   "name": "secure-flow",
   "version": "1.0.6-beta-2",
   "description": "Secure Flow is a lightweight TypeScript utility package for encryption and decryption using the AES-256-CBC algorithm. This package simplifies the process of securely encrypting and decrypting text, making it easy to integrate strong encryption into your Node.js applications.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
   "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/esm/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/esm/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "postinstall": "node dist/cli.js"
+    "build": "tsc && tsc -p tsconfig.esm.json"
   },
   "keywords": [
     "encrypt",
@@ -22,12 +29,9 @@
     "type": "git",
     "url": "https://github.com/adarshm07/secure-flow.git"
   },
-  "dependencies": {},
   "devDependencies": {
-    "@types/inquirer": "^9.0.7",
-    "@types/node": "^20.12.12",
-    "inquirer": "^9.2.22",
+    "@types/node": "^20.14.11",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.3"
   }
 }

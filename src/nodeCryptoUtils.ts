@@ -1,10 +1,15 @@
+import { createCipheriv, createDecipheriv } from 'crypto';
 import { loadConfig } from './loadConfig.js';
 import { Config } from './config.js';
-import { createCipheriv, createDecipheriv } from 'node:crypto';
 
-const config: Config = await loadConfig();
+let config: Config;
 
-export async function encrypt(text: string): Promise<string> {
+async function initConfig(): Promise<void> {
+  config = await loadConfig();
+}
+
+export async function encrypt(text: string): Promise<string | undefined> {
+  if (!config) await initConfig();
   try {
     const cipher = createCipheriv(
       config.encryptionAlgorithm,
@@ -14,13 +19,14 @@ export async function encrypt(text: string): Promise<string> {
     let encrypted = cipher.update(text, "utf8", "hex");
     encrypted += cipher.final("hex");
     return encrypted;
-  } catch (error: any) {
-    console.error("Error during encryption:", error.message);
+  } catch (error) {
+    console.error("Error during encryption:", (error as Error).message);
     return undefined;
   }
 }
 
-export async function decrypt(text: string): Promise<string> {
+export async function decrypt(text: string): Promise<string | undefined> {
+  if (!config) await initConfig();
   try {
     const decipher = createDecipheriv(
       config.encryptionAlgorithm,
@@ -31,8 +37,8 @@ export async function decrypt(text: string): Promise<string> {
     let decrypted = decipher.update(text, "hex", "utf8");
     decrypted += decipher.final("utf8");
     return decrypted;
-  } catch (error: any) {
-    console.error("Error during decryption:", error.message);
+  } catch (error) {
+    console.error("Error during decryption:", (error as Error).message);
     return undefined;
   }
 }
